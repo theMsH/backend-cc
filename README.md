@@ -6,7 +6,7 @@
 - open terminal in project's root
 - run commands below
 ```
-python -m venv .venv
+py -3.9 -m venv .venv 
 ```
 ```
 .venv/Scripts/activate
