@@ -13,7 +13,7 @@ def hello_world():
 
 @app.route("/sentiment", methods=["POST"])
 def get_sentiment():
-    input_data = request.json
+    input_data = request.json.get('message')
     sentiment = model.predict([input_data])[0]
     return {'input_data': input_data, 'sentiment': sentiment}
 
