@@ -1,11 +1,13 @@
 from flask import Flask, request
 import pickle
 from sklearn.pipeline import Pipeline
+from flask_cors import CORS
 
 with open("./assets/model.pkl", "rb") as f:
     model: Pipeline = pickle.load(f)
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def hello_world():
@@ -13,7 +15,8 @@ def hello_world():
 
 @app.route("/sentiment", methods=["POST"])
 def get_sentiment():
-    input_data = request.json.get('message')
+    data = request.get_json()
+    input_data = data.get("input_data")
     sentiment = model.predict([input_data])[0]
     return {'input_data': input_data, 'sentiment': sentiment}
 
