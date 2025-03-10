@@ -9,11 +9,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return "<h1>Sentiment backend v1</h1>"
+    return "<h1>Sentiment backend v1.1</h1>"
 
 @app.route("/sentiment", methods=["POST"])
 def get_sentiment():
-    input_data = request.json
+    input_data = request.json.get('message')
     sentiment = model.predict([input_data])[0]
     return {'input_data': input_data, 'sentiment': sentiment}
 
